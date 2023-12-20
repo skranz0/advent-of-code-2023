@@ -1,7 +1,7 @@
 import re
 
 def main():
-    with open("1-Trebuchet.txt") as file:
+    with open("1-tiny.txt") as file:
         print(f"Part 1: {part_one(file)}")
         print(f"Part 2: {part_two(file)}")
 
@@ -30,6 +30,7 @@ def part_two(file):
     for line in file:
         for key, value in number_strings.items():
             new_line = re.sub(key, value, line)
+        numbers = re.sub('[a-z]', '', line)[0:-1]
         value = int(numbers[0] + numbers[-1])
         sum += value
     return sum
