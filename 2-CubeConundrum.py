@@ -7,9 +7,24 @@ bag = {
 }
 
 class game:
-    def __init__(self, id, games):
+    def __init__(self, id: int, rounds):
         self.id = id
-        self.games = games
+        self.rounds = {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+        }
+        for round in rounds:
+            for pull in round:
+                if re.match("[0-9]red", pull) is not None:
+                    new_red = int(re.sub("red", "", pull))
+                    self.rounds["red"] += new_red
+                elif re.match("[0-9]blue", pull) is not None:
+                    new_blue = int(re.sub("blue", "", pull))
+                    self.rounds["blue"] += new_blue
+                elif re.match("[0-9]green", pull) is not None:
+                    new_green = int(re.sub("green", "", pull))
+                    self.rounds["green"] += new_green
 
 
 
@@ -20,5 +35,11 @@ with open("2-tiny.txt", "r") as file:
         id = int(line.split(":")[0])
         line = re.sub("[0-9]:", "", line)
         sets = line.split(";")
+        rounds = []
         for s in sets:
             s = s.split(",")
+            rounds.append(s)
+        new_game = game(id, rounds)
+        games.append(new_game)
+    for g in games:
+        print(g.rounds)
