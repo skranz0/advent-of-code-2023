@@ -40,8 +40,11 @@ with open("2-tiny.txt", "r") as file:
             rounds.append(s)
         new_game = Game(id, rounds)
         games.append(new_game)
-    for game in games:
-        print(game.rounds)
 
+possible = 0
 for game in games:
-    pass
+    if game.rounds["red"] > bag["red"] or game.rounds["green"] > bag["green"] or game.rounds["blue"] > bag["blue"]:
+        print(f"Game {game.id} not possible")
+        break
+    possible += game.id
+print(possible)
