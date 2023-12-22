@@ -6,7 +6,7 @@ bag = {
     "blue": 14
 }
 
-class game:
+class Game:
     def __init__(self, id: int, rounds):
         self.id = id
         self.rounds = {
@@ -27,9 +27,8 @@ class game:
                     self.rounds["green"] += new_green
 
 
-
+games = []
 with open("2-tiny.txt", "r") as file:
-    games = []
     for line in file:
         line = re.sub("\n| |Game", "", line)
         id = int(line.split(":")[0])
@@ -39,7 +38,10 @@ with open("2-tiny.txt", "r") as file:
         for s in sets:
             s = s.split(",")
             rounds.append(s)
-        new_game = game(id, rounds)
+        new_game = Game(id, rounds)
         games.append(new_game)
-    for g in games:
-        print(g.rounds)
+    for game in games:
+        print(game.rounds)
+
+for game in games:
+    pass
